@@ -1,8 +1,24 @@
+html {
+    overflow: hidden;
+}
+
 body,
 figure.interactive {
+    @include fs-bodyCopy(1);
+    color: #333;
+
+    position: relative;
     margin: 0;
     padding: 0;
     background-color: #dcdcdc;
+
+    @include mq(tablet) {
+        @include fs-bodyCopy(2, $size-only: true);
+    }
+}
+
+p {
+    margin: 0 0 8px 0;
 }
 
 // Link styles don't exist on the app
@@ -19,43 +35,147 @@ a {
     }
 }
 
-.interactive-container {
-    margin: 0 auto;
-    box-sizing: border-box;
-    background-color: white;
+.interactive-share-container {
+    position: absolute;
+    top: 100%;
+    white-space: nowrap;
 
-    padding: 10px;
-    @include mq(mobileLandscape) {
-        padding: 20px;
+    @include mq(desktop) {
+        position: static;
+        margin-left: 10px;
+        float: right;
+    }
+}
+
+.paris-map {
+    width: 100%;
+    height: calc(100% - 200px);
+    @include mq(tablet) {
+        height: calc(100% - 350px);
+    }
+    @include mq(desktop) {
+        height: 100%;
+    }
+
+    &::after {
+        display: block;
+        width: 0;
+        height: 0;
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
     }
 
     @each $bp in (tablet, desktop, leftCol, wide) {
         @include mq($bp) {
-            max-width: map-get($mq-breakpoints, $bp);
+            &::after {
+                content: "#{$bp}";
+            }
         }
     }
 }
 
-.interactive-es6-headline {
-	@include fs-headline(5);
+path.paris-map__point {
+    stroke: none;
+    fill: none;
 }
 
-.test-msg {
-	color: #005689;
-	@include fs-textSans(3);
+text.paris-map__point {
+    @include fs-textSans(2);
+    fill: white;
+    alignment-baseline: middle;
+    font-weight: bold;
+    @include mq(tablet) {
+        font-size: 16px;
+    }
 }
 
-.fonts {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	margin-top: 24px;
-	li {
-		margin-bottom: 6px;
-	}
+.paris-map-noclick {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
 }
 
-.fonts__egyptian { @include fs-headline(3); }
-.fonts__text-egyptian { @include fs-bodyCopy(2); }
-.fonts__sans { @include f-headlineSans; }
-.fonts__text-sans { @include fs-textSans(4); }
+.paris-title {
+    @include fs-headline(8);
+    margin: 0 0 48px 0;
+    position: relative;
+    max-width: calc(100% - 75px);
+    @include mq(desktop) {
+        max-width: none;
+        margin-bottom: 10px;
+    }
+}
+
+.paris-subtitle {
+    @include fs-header(2);
+    max-width: calc(100% - 80px);
+    min-height: 50px;
+    @include mq(desktop) {
+        min-height: 0;
+        max-width: none;
+    }
+    margin: 0;
+}
+
+.paris-circles-container {
+    position: absolute;
+    z-index: 10;
+    top: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    line-height: 0;
+    font-size: 0;
+
+    @include mq(desktop) {
+        display: none;
+    }
+}
+
+.paris-circles {
+    position: relative;
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.paris-circles__circle,
+.paris-circles__current {
+    width: 5px;
+    height: 5px;
+    border-radius: 100px;
+    border: 1px solid #333;
+}
+
+.paris-circles__circle {
+    display: inline-block;
+    background: white;
+    margin-right: 6px;
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.paris-circles__current {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black;
+
+    //transition: left 0.2s ease-out;
+}
+
+.interactive-caption {
+    @include fs-textSans(2);
+    margin-top: 5px;
+    display: inline-block;
+    line-height: 1.25;
+    color: #767676;
+}

@@ -1,0 +1,40 @@
+<ul class="paris-story js-chapter-list">
+    <li class="paris-story__chapter js-chapter is-current">
+        <div class="paris-story__chapter__btns">
+            <button class="paris-story__chapter__btn is-start js-next">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path fill="currentColor" d="M22.8 14.6l-7.6-7.6-.7.7 5.5 6.6h-14v1.5h14l-5.5 6.6.7.7 7.6-7.6v-.9"></path></svg>
+            </button>
+        </div>
+        <div class="chapter-container">
+            <div style="min-height: 70px">
+                <h1 class="paris-title">
+                    <p class="interactive-share-container">
+                        <button class="interactive-share" data-network="facebook"></button>
+                        <button class="interactive-share" data-network="twitter"></button>
+                        <button class="interactive-share" data-network="email"></button>
+                    </p>
+                    {{=it.furniture.headline}}
+                </h1>
+            </div>
+            <p>{{=it.furniture.standfirst}}</p>
+        </div>
+    </li>
+    {{~it.chapters :chapter:i}}
+        <li class="paris-story__chapter js-chapter">
+            <div class="paris-story__chapter__btns">
+                <button class="paris-story__chapter__btn is-prev js-prev">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path fill="currentColor" d="m 6,15.5 7.6,7.6 0.7,-0.7 -5.5,-6.6 14,0 0,-1.5 -14,0 L 14.3,7.7 13.6,7 6,14.6 6,15.5"></path></svg>
+                </button>
+                <button class="paris-story__chapter__btn {{?i === it.chapters.length - 1}}is-disabled{{?}} js-next">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path fill="currentColor" d="M22.8 14.6l-7.6-7.6-.7.7 5.5 6.6h-14v1.5h14l-5.5 6.6.7.7 7.6-7.6v-.9"></path></svg>
+                </button>
+            </div>
+            <div class="chapter-container">
+                <h2 class="paris-subtitle">{{=chapter.title}}</h2>
+                {{~chapter.copy :para:j}}
+                    <p>{{=para}}</p>
+                {{~}}
+            </div>
+        </li>
+    {{~}}
+</ul>
