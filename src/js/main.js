@@ -103,7 +103,7 @@ export function init(el, context, config, mediator) {
                             var parts = para.slice(4).split(' ');
                             return '<img src="' + parts[0] + '" /><span class="interactive-caption">' + parts.slice(1).join(' ') + '</span>';
                         }
-                        return para;
+                        return para.replace('”', '"');
                     });
             });
             app(el, resp, map);
