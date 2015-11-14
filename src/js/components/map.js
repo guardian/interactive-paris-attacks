@@ -36,13 +36,13 @@ export default function Map(el, config) {
         return [layer, layer2];
     }
     function adjust(latlng, zoom, mobileZoom) {
-        var view = window.getComputedStyle(el, ':after').getPropertyValue('content');
+        var view = window.getComputedStyle(el, ':after').getPropertyValue('content').replace(/["']/g, '');
         var overlayWidth = 0;
-        if (view === '"desktop"') {
+        if (view === 'desktop') {
             overlayWidth = 500;
-        } else if (view === '"leftCol"' || view === '"wide"') {
+        } else if (view === 'leftCol' || view === 'wide') {
             overlayWidth = 640;
-        } else if (view !== '"tablet"') {
+        } else if (view !== 'tablet') {
             zoom = (mobileZoom || zoom) - 1;
         }
         var targetPoint = map.project(latlng, zoom).subtract([overlayWidth / 2, 0]),

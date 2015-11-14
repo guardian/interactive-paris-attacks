@@ -76,7 +76,7 @@ function app(el, data, map) {
     }));
 
     map.go(data.chapters[0]);
-    map.invalidateSize();
+    map.invalidate();
 }
 
 export function init(el, context, config, mediator) {
