@@ -30,7 +30,9 @@
                 </button>
             </div>
             <div class="chapter-container">
-                <h2 class="paris-subtitle">{{=chapter.title}}</h2>
+                <div class="paris-subtitle-container">
+                    <h2 class="paris-subtitle">{{=chapter.title}}</h2>
+                </div>
                 {{~chapter.copy :para:j}}
                     <p>{{=para}}</p>
                 {{~}}
