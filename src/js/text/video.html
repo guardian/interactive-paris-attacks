@@ -1,5 +1,7 @@
 <div class="paris-video">
-    <video src="{{src}}"></video>
+    <video preload="none" poster="{{poster}}">
+        <source src="{{src}}" type="video/mp4"a />
+    </video>
     <button class="paris-video__play js-play">
         <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 32 32"><path fill="currentColor" d="M23 15.67l-11-4.67-.99.3v9.257l1 .3 11-4.67v-.5"/></svg>
     </button>

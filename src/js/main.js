@@ -67,7 +67,6 @@ function app(el, data, map) {
     [].slice.apply(el.querySelectorAll('.js-play')).forEach(playEl => {
         var parentEl = playEl.parentNode;
         var videoEl = parentEl.querySelector('video');
-        console.log(videoEl);
 
         playEl.addEventListener('click', () => videoEl.play());
         videoEl.addEventListener('play', () => parentEl.setAttribute('data-playing', ''));
@@ -111,13 +110,15 @@ export function init(el, context, config, mediator) {
                 chapter.copy = chapter.copy.replace(/[\r\n]+/g, '\n').trim().split('\n')
                     .map(para => {
                         if (para.indexOf('img@') === 0) {
-                            var parts = para.slice(4).split(' ');
+                            let parts = para.slice(4).split(' ');
                             return '<img src="' + parts[0] + '" /><span class="interactive-caption">' + parts.slice(1).join(' ') + '</span>';
                         }
                         if (para.indexOf('video@') === 0) {
-                            return videoHTML.replace('{{src}}', para.slice(6));
+                            let parts = para.slice(6).split(' ');
+                            console.log(parts);
+                            return videoHTML.replace('{{src}}', parts[0]).replace('{{poster}}', parts[1]);
                         }
-                        return para.replace('”', '"');
+                        return para.replace(/”/g, '"');
                     });
             });
             app(el, resp, map);
