@@ -11,9 +11,10 @@ import Map from './components/map'
 
 import mainHTML from './text/main.html!text'
 import chaptersHTML from './text/chapters.html!text'
+import videoHTML from './text/video.html!text'
 
 const dataURL = (bowser.msie && bowser.version < 10 ? '//' : 'https://') +
-    'interactive.guim.co.uk/docsdata/1CJjV9nYeubICVCyK8EUOuFiNwMfSgIKmzIRT0N0gFo0.json';
+    'interactive.guim.co.uk/docsdata-test/1CJjV9nYeubICVCyK8EUOuFiNwMfSgIKmzIRT0N0gFo0.json';
 
 var templateFn = doT.template(chaptersHTML);
 
@@ -63,6 +64,16 @@ function app(el, data, map) {
         shareEl.addEventListener('click', () => shareFn(network));
     });
 
+    [].slice.apply(el.querySelectorAll('.js-play')).forEach(playEl => {
+        var parentEl = playEl.parentNode;
+        var videoEl = parentEl.querySelector('video');
+        console.log(videoEl);
+
+        playEl.addEventListener('click', () => videoEl.play());
+        videoEl.addEventListener('play', () => parentEl.setAttribute('data-playing', ''));
+        videoEl.addEventListener('pause', () => parentEl.removeAttribute('data-playing'));
+    });
+
     var lastChapterNo = 0;
     chaptersEl.addEventListener('scroll', throttle(() => {
         var scrollTop = chaptersEl.scrollTop;
@@ -102,6 +113,9 @@ export function init(el, context, config, mediator) {
                         if (para.indexOf('img@') === 0) {
                             var parts = para.slice(4).split(' ');
                             return '<img src="' + parts[0] + '" /><span class="interactive-caption">' + parts.slice(1).join(' ') + '</span>';
+                        }
+                        if (para.indexOf('video@') === 0) {
+                            return videoHTML.replace('{{src}}', para.slice(6));
                         }
                         return para.replace('”', '"');
                     });
