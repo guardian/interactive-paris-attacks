@@ -9461,6 +9461,8 @@ L.Map.include({
 		    S = (r(1) - r0) / rho,
 		    duration = options.duration ? 1000 * options.duration : 1000 * S * 0.8;
 
+        //console.log(targetZoom, startZoom);
+
 		function frame() {
 			var t = (Date.now() - start) / duration,
 			    s = easeOut(t) * S;
@@ -9470,6 +9472,7 @@ L.Map.include({
 
 				this._move(
 					this.unproject(from.add(to.subtract(from).multiplyBy(u(s) / u1)), startZoom),
+                    //(targetZoom  - startZoom) * t + startZoom,
 					this.getScaleZoom(w0 / w(s), startZoom),
 					{flyTo: true});
 

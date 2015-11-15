@@ -1,5 +1,17 @@
-html {
+html:not(.is-app),
+html:not(.is-app) body,
+html:not(.is-app) figure.interactive {
     overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.l-header {
+    z-index: 20;
+}
+
+.l-side-margins {
+    display: none;
 }
 
 body,
@@ -14,6 +26,13 @@ figure.interactive {
 
     @include mq(tablet) {
         @include fs-bodyCopy(2, $size-only: true);
+    }
+}
+
+figure.interactive {
+    top: -48px;
+    .is-app & {
+        top: 0;
     }
 }
 
@@ -49,12 +68,16 @@ a {
 
 .paris-map {
     width: 100%;
-    height: calc(100% - 200px);
+    height: calc(100% - 300px);
     @include mq(tablet) {
-        height: calc(100% - 350px);
+        height: calc(100% - 450px);
     }
     @include mq(desktop) {
         height: 100%;
+    }
+
+    .is-app & {
+        height: 200px;
     }
 
     &::after {
@@ -119,7 +142,7 @@ text.paris-map__point {
 }
 .paris-subtitle {
     @include fs-header(2);
-    max-width: calc(100% - 80px);
+    max-width: calc(100% - 90px);
     @include mq(desktop) {
         min-height: 0;
     }

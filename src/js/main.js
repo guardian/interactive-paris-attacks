@@ -14,7 +14,7 @@ import chaptersHTML from './text/chapters.html!text'
 import videoHTML from './text/video.html!text'
 
 const dataURL = (bowser.msie && bowser.version < 10 ? '//' : 'https://') +
-    'interactive.guim.co.uk/docsdata-test/1CJjV9nYeubICVCyK8EUOuFiNwMfSgIKmzIRT0N0gFo0.json';
+    'interactive.guim.co.uk/docsdata/1CJjV9nYeubICVCyK8EUOuFiNwMfSgIKmzIRT0N0gFo0.json';
 
 var templateFn = doT.template(chaptersHTML);
 
@@ -92,14 +92,11 @@ function app(el, data, map) {
 export function init(el, context, config, mediator) {
     el.innerHTML = mainHTML;
 
-    var offset = guardian.api !== undefined ? 48 : (48+30);
-    function setContainerSize() {
-        el.style.height = (window.innerHeight - offset) + 'px';
-    }
-    window.addEventListener('resize', throttle(setContainerSize, 100));
-    setContainerSize();
-
     var map = new Map(el.querySelector('.js-map'), config);
+
+    if (!guardian.api) {
+        document.documentElement.className += ' is-app';
+    }
 
     reqwest({
         'url': dataURL,
@@ -115,7 +112,6 @@ export function init(el, context, config, mediator) {
                         }
                         if (para.indexOf('video@') === 0) {
                             let parts = para.slice(6).split(' ');
-                            console.log(parts);
                             return videoHTML.replace('{{src}}', parts[0]).replace('{{poster}}', parts[1]);
                         }
                         return para.replace(/”/g, '"');
