@@ -133,6 +133,20 @@
         margin: 0 0 20px 0;
 
     }
+
+    &.paris-story__chapter__btns--bottom {
+        display: none;
+
+        .is-app & {
+            position: static;
+            display: block;
+            text-align: right;
+            padding-right: 10px;
+            @include mq(mobileLandscape) {
+                padding-right: 20px;
+            }
+        }
+    }
 }
 
 .paris-story__chapter__btn {

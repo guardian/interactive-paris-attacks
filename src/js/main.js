@@ -45,16 +45,24 @@ function app(el, data, map) {
         currentEl.style.left = (chapterNo * 13) + 'px'
 
         map.go(chapter);
-
-        scrollTo(chaptersEl.scrollTop, chapterEl.offsetTop, y => chaptersEl.scrollTop = y);
     }
 
     chapterEls.forEach((chapterEl, chapterNo) => {
         if (chapterNo > 0) {
             chapterEl.querySelector('.js-prev').addEventListener('click', () => go(chapterNo - 1));
+            chapterEl.querySelector('.js-prev2').addEventListener('click', () => {
+                go(chapterNo - 1);
+                window.scrollTo(0, 0);
+            });
         }
         if (chapterNo < chapterEls.length - 1) {
             chapterEl.querySelector('.js-next').addEventListener('click', () => go(chapterNo + 1));
+            if (chapterNo > 0) {
+                chapterEl.querySelector('.js-next2').addEventListener('click', () => {
+                    go(chapterNo + 1);
+                    window.scrollTo(0, 0);
+                });
+            }
         }
     });
 
