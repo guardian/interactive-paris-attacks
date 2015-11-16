@@ -1,9 +1,15 @@
-html:not(.is-app),
-html:not(.is-app) body,
-html:not(.is-app) figure.interactive {
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
+@include mq(desktop) {
+    html,
+    body,
+    figure.interactive {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+    }
+
+    figure.interactive {
+        top: -48px;
+    }
 }
 
 .l-header {
@@ -22,17 +28,10 @@ figure.interactive {
     position: relative;
     margin: 0;
     padding: 0;
-    background-color: #dcdcdc;
+    background-color: white;
 
     @include mq(tablet) {
         @include fs-bodyCopy(2, $size-only: true);
-    }
-}
-
-figure.interactive {
-    top: -48px;
-    .is-app & {
-        top: 0;
     }
 }
 
@@ -68,16 +67,12 @@ a {
 
 .paris-map {
     width: 100%;
-    height: calc(100% - 300px);
+    height: 300px;
     @include mq(tablet) {
-        height: calc(100% - 450px);
+        height: 500px;
     }
     @include mq(desktop) {
         height: 100%;
-    }
-
-    .is-app & {
-        height: 200px;
     }
 
     &::after {

@@ -10,9 +10,9 @@
 
 .paris-container-inner {
     margin: 0 auto;
-    height: 100%;
-    .is-app & {
-        height: auto;
+
+    @include mq(desktop) {
+        height: 100%;
     }
 
     @each $bp in (tablet, desktop, leftCol, wide) {
@@ -28,11 +28,6 @@
     margin: 0;
     padding: 0;
 
-    .is-app & {
-        width: auto;
-        height: auto;
-    }
-
     @include mq(desktop) {
         height: 100%;
         width: 500px;
@@ -47,29 +42,17 @@
 .paris-story__chapter {
     position: relative;
     display: none;
-    width: 100%;
-    height: 300px;
     background-color: white;
 
     box-sizing: border-box;
-
-    @include mq(tablet) {
-        height: 450px;
-    }
 
     &.is-current {
         display: block;
     }
 
-    .is-app & {
-        width: auto;
-        height: auto;
-    }
-
     @include mq(desktop) {
         background-color: transparentize(white, 0.1);
         margin: 0 0 0 auto;
-        height: auto;
         display: block;
         border-bottom: 1px solid #dcdcdc;
         padding-bottom: 20px;
@@ -88,26 +71,14 @@
 }
 
 .chapter-container {
-    width: 100%;
-    height: 100%;
-
     box-sizing: border-box;
-
-    overflow-y: scroll;
 
     padding: 10px;
     @include mq(mobileLandscape) {
         padding: 20px;
     }
 
-    .is-app & {
-        width: auto;
-        height: auto;
-        overflow-y: visible;
-    }
-
     @include mq(desktop) {
-        overflow-y: hidden;
         .paris-story__chapter:last-child & {
             padding-top: 300px;
         }
@@ -135,16 +106,20 @@
     }
 
     &.paris-story__chapter__btns--bottom {
-        display: none;
+        position: static;
+        display: block;
+        text-align: right;
+        padding-right: 10px;
+        @include mq(mobileLandscape) {
+            padding-right: 20px;
+        }
 
-        .is-app & {
-            position: static;
-            display: block;
-            text-align: right;
-            padding-right: 10px;
-            @include mq(mobileLandscape) {
-                padding-right: 20px;
-            }
+        @include mq(desktop) {
+            display: none;
+        }
+
+        .paris-story__chapter:last-child & {
+            display: none;
         }
     }
 }

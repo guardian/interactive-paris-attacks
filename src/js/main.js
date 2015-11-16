@@ -102,10 +102,6 @@ export function init(el, context, config, mediator) {
 
     var map = new Map(el.querySelector('.js-map'), config);
 
-    if (!guardian.api) {
-        document.documentElement.className += ' is-app';
-    }
-
     reqwest({
         'url': dataURL,
         'type': 'json',
