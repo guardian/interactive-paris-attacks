@@ -96,13 +96,12 @@
     z-index: 2;
     font-size: 0;
 
-    @include mq(desktop) {
-        top: auto;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: 0 0 20px 0;
+    &.is-start {
+        position: static;
+    }
 
+    @include mq(desktop) {
+        display: none;
     }
 
     &.paris-story__chapter__btns--bottom {
@@ -140,14 +139,21 @@
         height: 35px;
     }
 
-    &.is-start {
+    .is-start & {
+        @include f-textSans;
+        font-size: 16px;
+        font-weight: bold;
         border: 0;
-        background-color: #ffce4b;
+        margin: 0 0 30px;
+        background-color: #005689;
         color: white;
+        padding: 0 5px 0 15px;
 
         & > svg {
-            width: 70px;
-            height: 70px;
+            display: inline-block;
+            vertical-align: middle;
+            width: 50px;
+            height: 50px;
         }
     }
 
@@ -158,21 +164,6 @@
 
     @include mq(desktop) {
         display: none;
-        margin: 0 auto;
-        background: transparent;
-
-        & > svg {
-            -ms-transform: rotate(90deg);
-            -webkit-transform: rotate(90deg);
-            transform: rotate(90deg);
-            width: 80px !important;
-            height: 80px !important;
-        }
-
-        &.is-prev,
-        &.is-disabled {
-            display: none;
-        }
     }
 }
 

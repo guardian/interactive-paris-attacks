@@ -1,10 +1,5 @@
 <ul class="paris-story js-chapter-list">
     <li class="paris-story__chapter js-chapter is-current">
-        <div class="paris-story__chapter__btns">
-            <button class="paris-story__chapter__btn is-start js-next">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path fill="currentColor" d="M22.8 14.6l-7.6-7.6-.7.7 5.5 6.6h-14v1.5h14l-5.5 6.6.7.7 7.6-7.6v-.9"></path></svg>
-            </button>
-        </div>
         <div class="chapter-container">
             <div style="min-height: 70px">
                 <h1 class="paris-title">
@@ -16,7 +11,13 @@
                     {{=it.furniture.headline}}
                 </h1>
             </div>
-            <p>{{=it.furniture.standfirst}}</p>
+            <p class="paris-standfirst">{{=it.furniture.standfirst}}</p>
+            <div class="paris-story__chapter__btns is-start">
+                <button class="paris-story__chapter__btn js-next">
+                    Next: the sequence of events
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path fill="currentColor" d="M22.8 14.6l-7.6-7.6-.7.7 5.5 6.6h-14v1.5h14l-5.5 6.6.7.7 7.6-7.6v-.9"></path></svg>
+                </button>
+            </div>
         </div>
     </li>
     {{~it.chapters :chapter:i}}
